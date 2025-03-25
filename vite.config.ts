@@ -10,6 +10,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    historyApiFallback: true // Ensure fallback to index.html for SPA routing
   },
   plugins: [
     react(),
@@ -21,4 +22,12 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        fallback: 'public/404.html'
+      }
+    }
+  }
 }));
